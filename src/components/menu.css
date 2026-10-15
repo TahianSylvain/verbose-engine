@@ -1,0 +1,126 @@
+/* Uses the design tokens already defined in your global :root
+   (--surface, --surface2, --accent, --border, --font-display, --font-mono, --radius…)
+   No extra @import or reset needed — drop this next to your existing stylesheet. */
+
+.mode-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* ── trigger (matches .status-pill / .model-select-box look) ── */
+.mode-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--accent-border);
+  border-radius: 30px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.mode-menu-trigger:hover {
+  background: var(--surface3);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.mode-menu-trigger.open {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.mode-menu-chevron {
+  color: var(--text-mid);
+  transition: transform 0.2s ease;
+}
+
+.mode-menu-trigger.open .mode-menu-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+/* ── dropdown list ── */
+.mode-menu-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 190px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(57, 255, 122, 0.05);
+  z-index: 30;
+  animation: modeMenuDrop 0.16s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes modeMenuDrop {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+.mode-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mode-menu-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 7px;
+  background: var(--surface2);
+  color: var(--text-mid);
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mode-menu-item:hover {
+  background: var(--accent-dim);
+  color: var(--text);
+}
+
+.mode-menu-item:hover .mode-menu-item-icon {
+  color: var(--accent);
+}
+
+.mode-menu-item.active {
+  color: var(--accent);
+}
+
+.mode-menu-item.active .mode-menu-item-icon {
+  background: var(--accent);
+  color: #050d08;
+}
+
+.mode-menu-dot {
+  margin-left: auto;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  flex-shrink: 0;
+}
